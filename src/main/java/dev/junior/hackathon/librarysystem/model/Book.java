@@ -5,6 +5,8 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 
 import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Table(name="books")
@@ -21,12 +23,15 @@ public class Book {
     @Column
     private String author;
     @Column
-    private String genre;
-    @Column
     private Date date;
     @Column(columnDefinition = "text")
     private String description;
 
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(	name = "book_genres",
+            joinColumns = @JoinColumn(name = "book_id"),
+            inverseJoinColumns = @JoinColumn(name = "genre_id"))
+    private Set<Genre> genres = new HashSet<>();
 
 
     // должны быть поля для фоток и для файлов
