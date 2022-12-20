@@ -1,6 +1,7 @@
 package dev.junior.hackathon.librarysystem.security.service;
 
 import dev.junior.hackathon.librarysystem.model.Book;
+import dev.junior.hackathon.librarysystem.model.Genre;
 import dev.junior.hackathon.librarysystem.repository.BookRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -39,5 +40,10 @@ public class BookService {
 
     public void deleteBook(Long id) {
         bookRepository.deleteById(id);
+    }
+
+    public List<Book> getBooksByGenre(Genre genre){
+        return bookRepository.findAll().stream()
+                .filter(i->i.getGenres().contains(genre)).toList();
     }
 }

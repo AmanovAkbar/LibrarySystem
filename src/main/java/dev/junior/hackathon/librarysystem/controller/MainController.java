@@ -1,10 +1,12 @@
 package dev.junior.hackathon.librarysystem.controller;
 
 import dev.junior.hackathon.librarysystem.model.Book;
+import dev.junior.hackathon.librarysystem.model.Genre;
 import dev.junior.hackathon.librarysystem.model.User;
 import dev.junior.hackathon.librarysystem.repository.UserRepository;
 import dev.junior.hackathon.librarysystem.security.jwt.response.ResponseMessage;
 import dev.junior.hackathon.librarysystem.security.service.BookService;
+import dev.junior.hackathon.librarysystem.security.service.GenreService;
 import dev.junior.hackathon.librarysystem.security.service.UserDetailsServiceImpl;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
@@ -23,10 +25,12 @@ public class MainController {
     private BookService bookService;
     private UserRepository userRepository;
     private UserDetailsServiceImpl userService;
-    public MainController(BookService bookService, UserRepository userRepository,UserDetailsServiceImpl userService){
+    private GenreService genreService;
+    public MainController(BookService bookService, UserRepository userRepository,UserDetailsServiceImpl userService,GenreService genreService){
         this.bookService = bookService;
         this.userRepository = userRepository;
         this.userService = userService;
+        this.genreService= genreService;
     }
 
     @GetMapping("/")
@@ -73,8 +77,13 @@ public class MainController {
         bookService.deleteBook(id);
         return ResponseEntity.ok(HttpStatus.OK);
     }
-//    @GetMapping("/books/genre/{id}")
-//    public ResponseEntity<List<Book>> getBookByJanre(){
-//        return new ResponseEntity<>()
-//    }
+    @GetMapping("/books/genres")
+    public ResponseEntity<List<Genre>> getGenres(){
+        return new ResponseEntity<>(genreService.listGenres(),HttpStatus.OK);
+    }
+    @GetMapping("/books/genres/{id}")
+    public ResponseEntity<List<Book>> getBooksByJanre(@PathVariable(name = "id") Long id){
+        Genre genre = genreService.getGenreById(id);
+        return new ResponseEntity<>(bookService.getBooksByGenre(genre),HttpStatus.OK);
+    }
 }
