@@ -52,7 +52,8 @@ public class User {
     @Min(1)
     private Integer age;
 
-    // должен быть поле для фотки
+    // должно быть поле для фотки
+
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(	name = "user_roles",
             joinColumns = @JoinColumn(name = "user_id"),
@@ -155,5 +156,12 @@ public class User {
 
     public void setAge(Integer age) {
         this.age = age;
+    }
+
+    public Set<Book> getBooks() {
+        return books;
+    }
+    public void setBooks(Set<Book> books) {
+        this.books = books;
     }
 }
