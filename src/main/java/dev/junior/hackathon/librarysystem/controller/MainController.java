@@ -73,4 +73,8 @@ public class MainController {
         bookService.deleteBook(id);
         return ResponseEntity.ok(HttpStatus.OK);
     }
+//    @GetMapping("/books/genre/{id}")
+//    public ResponseEntity<List<Book>> getBookByJanre(){
+//        return new ResponseEntity<>()
+//    }
 }
