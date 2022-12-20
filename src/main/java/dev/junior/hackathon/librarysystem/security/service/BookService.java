@@ -1,4 +1,4 @@
-package dev.junior.hackathon.librarysystem.service;
+package dev.junior.hackathon.librarysystem.security.service;
 
 import dev.junior.hackathon.librarysystem.model.Book;
 import dev.junior.hackathon.librarysystem.repository.BookRepository;
@@ -7,7 +7,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
 @Transactional
@@ -26,10 +25,9 @@ public class BookService {
 //
 
     @Transactional
-    public void create(Book book) {
+    public void createBook(Book book) {
         bookRepository.save(book);
     }
-
     /***
      * Получить пользователя по ID
      * @param id ID пользователя
