@@ -24,11 +24,4 @@ public class UserDetailsServiceImpl implements UserDetailsService {
                 .orElseThrow(() -> new UsernameNotFoundException("User Not Found with username: " + username));
         return UserDetailsImpl.build(user);
     }
-
-    @Transactional
-    public void updateUser(User user) throws UsernameNotFoundException{
-        User old = userRepository.findUserByUsername(user.getUsername()).orElseThrow(() -> new UsernameNotFoundException("No user with that name"));
-        user.setId(old.getId());
-        userRepository.save(user);
-    }
 }

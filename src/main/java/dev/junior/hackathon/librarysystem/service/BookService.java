@@ -1,4 +1,4 @@
-package dev.junior.hackathon.librarysystem.security.service;
+package dev.junior.hackathon.librarysystem.service;
 
 import dev.junior.hackathon.librarysystem.model.Book;
 import dev.junior.hackathon.librarysystem.model.Genre;
@@ -12,9 +12,7 @@ import java.util.List;
 @Service
 @Transactional
 public class BookService {
-    private final BookRepository bookRepository;
-    @Autowired
-
+    private BookRepository bookRepository;
     public BookService(BookRepository bookRepository) {
         this.bookRepository = bookRepository;
     }

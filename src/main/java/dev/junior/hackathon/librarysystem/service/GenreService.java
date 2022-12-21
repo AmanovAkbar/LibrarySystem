@@ -1,8 +1,9 @@
-package dev.junior.hackathon.librarysystem.security.service;
+package dev.junior.hackathon.librarysystem.service;
 
 import dev.junior.hackathon.librarysystem.model.Book;
 import dev.junior.hackathon.librarysystem.model.Genre;
 import dev.junior.hackathon.librarysystem.repository.GenreRepository;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -18,6 +19,6 @@ public class GenreService {
     }
 
     public Genre getGenreById(Long id) {
-        return genreRepository.findGenreById(id).orElse(null);
+        return genreRepository.findGenreById(id).orElseThrow(()->new UsernameNotFoundException("not found that genre"));
     }
 }
